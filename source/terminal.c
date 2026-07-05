@@ -10,7 +10,10 @@ struct cursor {
 #include <windows.h>
 struct cursor get_cursor(void) {
     struct cursor cursor_pos;
-    if (GetCursorPos(&cursor_pos)) {
+    POINT point;
+    if (GetCursorPos(&point)) {
+        cursor_pos.x = point.x;
+        cursor_pos.y = point.y;
         return cursor_pos;
     }
     else {
