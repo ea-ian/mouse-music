@@ -1,12 +1,16 @@
-#include <windows.h>
 #include <stdio.h>
+#include "terminal.c"
 
 int main() {
-    struct POINT cursorPos;
-    if (GetCursorPos(&cursorPos)) {
-        printf("Cursor Position: X = %d, Y = %d\n", cursorPos.x, cursorPos.y);
-    } else {
-        printf("Failed to get cursor position.\n");
+    struct cursor cursor_pos;
+    cursor_pos = get_cursor();
+    if (cursor_pos.x == -1) {
+        return 1;
     }
+
+    printf("mouse position:(%d, %d)\n",
+            cursor_pos.x,
+            cursor_pos.y);
+
     return 0;
 }
